@@ -11,10 +11,10 @@
 
 int main() {
     setbuf(stdout, NULL);
-
-    long double N;
+    
+    unsigned long int N;
     printf("Enter number N: ");
-    scanf("%Lf", &N);
+    scanf("%lu", &N);
 
     long double product_of_numbers_1 = 1;
     long double product_of_numbers_2 = 1;
