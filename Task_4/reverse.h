@@ -1,7 +1,9 @@
 #ifndef REVERSE_H
 #define REVERSE_H
 
-void reverse_p_begin_and_count(int *p_begin, int count);
-void reverse_p_begin_and_p_end(int *p_begin, int *p_end);
+#include <inttypes.h>
+
+void reverse_p_begin_and_count(int8_t *p_begin, int8_t count);
+void reverse_p_begin_and_p_end(int8_t *p_begin, int8_t *p_end);
 
 #endif

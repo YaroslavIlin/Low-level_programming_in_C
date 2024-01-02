@@ -1,7 +1,9 @@
 #ifndef SORT_H
 #define SORT_H
 
-void sort_p_begin_and_count(int *p_begin, int count);
-void sort_p_begin_and_p_end(int *p_begin, int *p_end);
+#include <inttypes.h>
+
+void sort_p_begin_and_count(int8_t *p_begin, int8_t count);
+void sort_p_begin_and_p_end(int8_t *p_begin, int8_t *p_end);
 
 #endif
