@@ -9,11 +9,15 @@ int main() {
     long long int minimum_element;
 
     get_array_size(&array_of_arrays_size);
-    if (initialize_array_of_arrays(array_of_arrays, number_of_elements, array_of_arrays_size)) {
+    if (initialize_array_of_arrays(&array_of_arrays, &number_of_elements, array_of_arrays_size)) {
         long long int minimum_elements[array_of_arrays_size];
+        for (long long int i = 0; i < array_of_arrays_size; i++) {
+            minimum_elements[i] = LONG_LONG_MAX;
+        }
         fill_in_array_of_arrays(array_of_arrays, number_of_elements, array_of_arrays_size, minimum_elements);
         minimum_element = *get_minimum_element(minimum_elements, array_of_arrays_size);
         normalize(array_of_arrays, number_of_elements, array_of_arrays_size, minimum_element);
+        printf("\n");
         output(array_of_arrays, number_of_elements, array_of_arrays_size);
         array_free(array_of_arrays, number_of_elements, array_of_arrays_size);
     }

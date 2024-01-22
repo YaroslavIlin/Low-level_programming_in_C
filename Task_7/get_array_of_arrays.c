@@ -11,7 +11,7 @@ void get_array_size(long long int *array_size) {
     }
 }
 
-int8_t initialize_array_of_arrays(long long int **array_of_arrays, long long int *number_of_elements, long long int array_of_arrays_size) {
+int8_t initialize_array_of_arrays(long long int ***array_of_arrays, long long int **number_of_elements, long long int array_of_arrays_size) {
     int8_t flag = 1;
     if (array_of_arrays_size == -1) {
         flag = 0;
@@ -21,8 +21,8 @@ int8_t initialize_array_of_arrays(long long int **array_of_arrays, long long int
         printf("None\n");
         printf("Array of arrays size is zero");
     } else {
-        array_of_arrays = calloc(array_of_arrays_size, sizeof(long long int*));
-        number_of_elements = malloc(array_of_arrays_size * sizeof(long long int));
+        *array_of_arrays = calloc(array_of_arrays_size, sizeof(long long int*));
+        *number_of_elements = malloc(array_of_arrays_size * sizeof(long long int));
         if (!array_of_arrays && !number_of_elements) {
             flag = 0;
             printf("Error!");
@@ -40,7 +40,9 @@ void fill_in_array_of_arrays(long long int **array_of_arrays, long long int *num
             array_of_arrays[i] = calloc(number_of_elements[i], sizeof(long long int));
             if (array_of_arrays[i]) {
                 if (get_array_elements(array_of_arrays[i], number_of_elements[i])) {
-                    *(minimum_elements + i) = *get_minimum_element(array_of_arrays[i], number_of_elements[i]);
+                    if (number_of_elements[i]) {
+                        *(minimum_elements + i) = *get_minimum_element(array_of_arrays[i], number_of_elements[i]);
+                    }
                 } else {
                     printf("Error!");
                 }
@@ -89,6 +91,10 @@ void normalize(long long int **array_of_arrays, long long int *number_of_element
 void output(long long int **array_of_arrays, long long int *number_of_elements, long long int array_of_arrays_size) {
     for (long long int i = 0; i < array_of_arrays_size; i++) {
         for (long long int j = 0; j < number_of_elements[i]; j++) {
+            if (number_of_elements[i] == 0) {
+                printf("\n");
+                continue;
+            }
             if (j == number_of_elements[i] - 1) {
                 printf("%lld\n", array_of_arrays[i][j]);
             } else {
@@ -100,7 +106,9 @@ void output(long long int **array_of_arrays, long long int *number_of_elements, 
 
 void array_free(long long int **array_of_arrays, long long int *number_of_elements, long long int array_of_arrays_size) {
     for (long long int i = 0; i < array_of_arrays_size; i++) {
-        free(array_of_arrays[i]);
+        if (number_of_elements[i]) {
+            free(array_of_arrays[i]);
+        }
     }
     free(array_of_arrays);
     free(number_of_elements);
